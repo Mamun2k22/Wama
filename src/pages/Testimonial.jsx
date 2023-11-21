@@ -1,150 +1,410 @@
-import React, { useEffect } from 'react';
-import Swiper from 'swiper';
-import 'swiper/css';
+import React, { useCallback, useRef } from "react";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Testimonial = () => {
-  useEffect(() => {
-    // Initialize Swiper when component mounts
-    const mySwiper = new Swiper('.swiper-container', {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 10,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
+  const sliderRef = useRef(null);
 
-    // Destroy Swiper when component unmounts
-    return () => {
-      mySwiper.destroy();
-    };
-  }, []); // Empty dependency array ensures the effect runs only once on mount
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
 
   return (
-    <div className="mx-auto text-center md:max-w-xl lg:max-w-3xl">
-      <h3 className="mb-6 text-3xl font-bold text-neutral-800 dark:text-neutral-200">
-        Testimonials
-      </h3>
-
-      {/* Container for the Testimonials Slider */}
-      <div className="swiper-container mx-auto my-8">
-        <div className="swiper-wrapper grid gap-6 text-center md:grid-cols-1 lg:grid-cols-3 lg:gap-12">
-          {/* First Testimonial */}
-          <div className="swiper-slide">
-            {/* Testimonial content */}
-            <div className="mb-6 flex justify-center">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                className="w-32 rounded-full shadow-lg dark:shadow-black/30"
-                alt="User"
+    <>
+      <section id="Testimonial" className="pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
+        <div className="container mx-auto">
+          <Swiper slidesPerView={1} ref={sliderRef}>
+            <SwiperSlide>
+              <SingleTestimonial
+                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg"
+                reviewImg="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/lineicon.svg"
+                reviewAlt="lineicon"
+                details="Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id! Mollitia perspiciatis est asperiores commodi labore!"
+                name="Larry Diamond"
+                position="Chief Executive Officer."
               />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SingleTestimonial
+                image="https://themes.muffingroup.com/be/consultant2/wp-content/uploads/2021/04/consultant2-pic6.png"
+                reviewImg="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/lineicon.svg"
+                reviewAlt="lineicon"
+                details="Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id! Mollitia perspiciatis est asperiores commodi labore!"
+                name="Larry Diamond"
+                position="Chief Executive Officer."
+              />
+            </SwiperSlide>
+            <div className="absolute left-0 right-0 z-10 flex items-center justify-center gap-5 sm:bottom-0">
+              <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
+                <button className="d flex h-[60px] w-[60px] items-center justify-center rounded-full border border-stroke bg-white text-dark transition-all hover:border-transparent hover:drop-shadow-testimonial dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:drop-shadow-none">
+                  <svg
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="fill-current"
+                  >
+                    <path
+                      d="M17.5 9.5H4.15625L9.46875 4.09375C9.75 3.8125 9.75 3.375 9.46875 3.09375C9.1875 2.8125 8.75 2.8125 8.46875 3.09375L2 9.65625C1.71875 9.9375 1.71875 10.375 2 10.6562L8.46875 17.2188C8.59375 17.3438 8.78125 17.4375 8.96875 17.4375C9.15625 17.4375 9.3125 17.375 9.46875 17.25C9.75 16.9687 9.75 16.5313 9.46875 16.25L4.1875 10.9062H17.5C17.875 10.9062 18.1875 10.5937 18.1875 10.2187C18.1875 9.8125 17.875 9.5 17.5 9.5Z"
+                      fill=""
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="next-arrow cursor-pointer" onClick={handleNext}>
+                <button className="d flex h-[60px] w-[60px] items-center justify-center rounded-full border border-stroke bg-white text-dark transition-all hover:border-transparent hover:drop-shadow-testimonial dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:drop-shadow-none">
+                  <svg
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="fill-current"
+                  >
+                    <path
+                      d="M18 9.6875L11.5312 3.125C11.25 2.84375 10.8125 2.84375 10.5312 3.125C10.25 3.40625 10.25 3.84375 10.5312 4.125L15.7812 9.46875H2.5C2.125 9.46875 1.8125 9.78125 1.8125 10.1562C1.8125 10.5312 2.125 10.875 2.5 10.875H15.8437L10.5312 16.2813C10.25 16.5625 10.25 17 10.5312 17.2813C10.6562 17.4063 10.8437 17.4688 11.0312 17.4688C11.2187 17.4688 11.4062 17.4062 11.5312 17.25L18 10.6875C18.2812 10.4062 18.2812 9.96875 18 9.6875Z"
+                      fill=""
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
-            <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
-              Web Developer
-            </h6>
-            <p className="mb-4">
+          </Swiper>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Testimonial;
+
+const SingleTestimonial = ({
+  image,
+  reviewImg,
+  reviewAlt,
+  details,
+  name,
+  position,
+}) => {
+  return (
+    <div className="relative flex justify-center">
+      <div className="relative w-full pb-16 md:w-11/12 lg:w-10/12 xl:w-8/12">
+        <div className="w-full items-center md:flex">
+          <div className="relative mb-12 w-full max-w-[310px] md:mb-0 md:mr-12 md:max-w-[250px] lg:mr-14 lg:max-w-[280px] 2xl:mr-16">
+            <img src={image} alt="image" className="w-full" />
+            <span className="absolute -left-6 -top-6 z-[-1] hidden sm:block">
+              <DotShape />
+            </span>
+            <span className="absolute -bottom-6 -right-6 z-[-1]">
               <svg
+                width="64"
+                height="64"
+                viewBox="0 0 64 64"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="inline-block h-7 w-7 pr-2"
-                viewBox="0 0 24 24"
               >
-                <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                <path
+                  d="M3 32C3 15.9837 15.9837 3 32 3C48.0163 2.99999 61 15.9837 61 32C61 48.0163 48.0163 61 32 61C15.9837 61 3 48.0163 3 32Z"
+                  stroke="#13C296"
+                  strokeWidth="6"
+                />
               </svg>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-              eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
+            </span>
           </div>
+          <div className="w-full">
+            <div>
+              <div className="mb-7">
+                <img src={reviewImg} alt={reviewAlt} />
+              </div>
 
-          {/* Second Testimonial */}
-          <div className="swiper-slide">
-            {/* Testimonial content */}
-            <div className="mb-6 flex justify-center">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(2).jpg"
-                className="w-32 rounded-full shadow-lg dark:shadow-black/30"
-                alt="User"
-              />
-            </div>
-            <h5 className="mb-4 text-xl font-semibold">Lisa Cudrow</h5>
-            <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
-              Graphic Designer
-            </h6>
-            <p className="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="inline-block h-7 w-7 pr-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-              </svg>
-              Ut enim ad minima veniam, quis nostrum exercitationem ullam
-              corporis suscipit laboriosam, nisi ut aliquid commodi.
-            </p>
-            {/* Rating stars */}
-            <ul className="mb-0 flex items-center justify-center">
-              <li>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5 text-yellow-500"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.23l-4.39 3.8 1.43 5.682c.308 1.22-.532 1.803-1.544 1.14L12 16.682l-4.857 3.544c-1.012.663-1.852.081-1.544-1.14l1.43-5.682-4.39-3.8c-.887-.685-.415-2.137.749-2.23l5.404-.433 2.082-5.007zM12 15.155l-3.766 2.744 1.445-5.735L5.805 8.37l4.738-.383L12 2.74l1.457 5.247 4.738.383-3.874 3.794 1.445 5.735L12 15.155z"
-                  />
-                </svg>
-              </li>
-              {/* Add more stars if needed */}
-            </ul>
-          </div>
+              <p className="mb-11 text-base font-normal italic leading-[1.81] text-body-color dark:text-dark-6 sm:text-[22px]">
+                {details}
+              </p>
 
-          {/* Third Testimonial */}
-          <div className="swiper-slide">
-            {/* Testimonial content */}
-            <div className="mb-6 flex justify-center">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(3).jpg"
-                className="w-32 rounded-full shadow-lg dark:shadow-black/30"
-                alt="User"
-              />
+              <h4 className="mb-2 text-[22px] font-semibold leading-[27px] text-dark dark:text-white">
+                {name}
+              </h4>
+              <p className="text-base text-body-color dark:text-dark-6">
+                {position}
+              </p>
             </div>
-            <h5 className="mb-4 text-xl font-semibold">John Doe</h5>
-            <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
-              Product Manager
-            </h6>
-            <p className="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="inline-block h-7 w-7 pr-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-              </svg>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
-            </p>
           </div>
         </div>
-
-        {/* Add Pagination */}
-        <div className="swiper-pagination"></div>
-
-        {/* Add Navigation */}
-        <div className="swiper-button-next"></div>
-        <div className="swiper-button-prev"></div>
       </div>
     </div>
   );
 };
 
-export default Testimonial;
+const DotShape = () => {
+  return (
+    <>
+      <svg
+        width="77"
+        height="77"
+        viewBox="0 0 77 77"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="1.66343"
+          cy="74.5221"
+          r="1.66343"
+          transform="rotate(-90 1.66343 74.5221)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="1.66343"
+          cy="30.94"
+          r="1.66343"
+          transform="rotate(-90 1.66343 30.94)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="16.3016"
+          cy="74.5221"
+          r="1.66343"
+          transform="rotate(-90 16.3016 74.5221)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="16.3016"
+          cy="30.94"
+          r="1.66343"
+          transform="rotate(-90 16.3016 30.94)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="30.9398"
+          cy="74.5221"
+          r="1.66343"
+          transform="rotate(-90 30.9398 74.5221)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="30.9398"
+          cy="30.94"
+          r="1.66343"
+          transform="rotate(-90 30.9398 30.94)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="45.578"
+          cy="74.5221"
+          r="1.66343"
+          transform="rotate(-90 45.578 74.5221)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="45.578"
+          cy="30.94"
+          r="1.66343"
+          transform="rotate(-90 45.578 30.94)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="60.2162"
+          cy="74.5216"
+          r="1.66343"
+          transform="rotate(-90 60.2162 74.5216)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="74.6634"
+          cy="74.5216"
+          r="1.66343"
+          transform="rotate(-90 74.6634 74.5216)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="60.2162"
+          cy="30.9398"
+          r="1.66343"
+          transform="rotate(-90 60.2162 30.9398)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="74.6634"
+          cy="30.9398"
+          r="1.66343"
+          transform="rotate(-90 74.6634 30.9398)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="1.66343"
+          cy="59.8839"
+          r="1.66343"
+          transform="rotate(-90 1.66343 59.8839)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="1.66343"
+          cy="16.3017"
+          r="1.66343"
+          transform="rotate(-90 1.66343 16.3017)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="16.3016"
+          cy="59.8839"
+          r="1.66343"
+          transform="rotate(-90 16.3016 59.8839)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="16.3016"
+          cy="16.3017"
+          r="1.66343"
+          transform="rotate(-90 16.3016 16.3017)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="30.9398"
+          cy="59.8839"
+          r="1.66343"
+          transform="rotate(-90 30.9398 59.8839)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="30.9398"
+          cy="16.3017"
+          r="1.66343"
+          transform="rotate(-90 30.9398 16.3017)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="45.578"
+          cy="59.8839"
+          r="1.66343"
+          transform="rotate(-90 45.578 59.8839)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="45.578"
+          cy="16.3017"
+          r="1.66343"
+          transform="rotate(-90 45.578 16.3017)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="60.2162"
+          cy="59.8839"
+          r="1.66343"
+          transform="rotate(-90 60.2162 59.8839)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="74.6634"
+          cy="59.8839"
+          r="1.66343"
+          transform="rotate(-90 74.6634 59.8839)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="60.2162"
+          cy="16.3017"
+          r="1.66343"
+          transform="rotate(-90 60.2162 16.3017)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="74.6634"
+          cy="16.3017"
+          r="1.66343"
+          transform="rotate(-90 74.6634 16.3017)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="1.66343"
+          cy="45.2455"
+          r="1.66343"
+          transform="rotate(-90 1.66343 45.2455)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="1.66343"
+          cy="1.66342"
+          r="1.66343"
+          transform="rotate(-90 1.66343 1.66342)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="16.3016"
+          cy="45.2455"
+          r="1.66343"
+          transform="rotate(-90 16.3016 45.2455)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="16.3016"
+          cy="1.66342"
+          r="1.66343"
+          transform="rotate(-90 16.3016 1.66342)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="30.9398"
+          cy="45.2455"
+          r="1.66343"
+          transform="rotate(-90 30.9398 45.2455)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="30.9398"
+          cy="1.66342"
+          r="1.66343"
+          transform="rotate(-90 30.9398 1.66342)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="45.578"
+          cy="45.2455"
+          r="1.66343"
+          transform="rotate(-90 45.578 45.2455)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="45.578"
+          cy="1.66344"
+          r="1.66343"
+          transform="rotate(-90 45.578 1.66344)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="60.2162"
+          cy="45.2458"
+          r="1.66343"
+          transform="rotate(-90 60.2162 45.2458)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="74.6634"
+          cy="45.2458"
+          r="1.66343"
+          transform="rotate(-90 74.6634 45.2458)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="60.2162"
+          cy="1.66371"
+          r="1.66343"
+          transform="rotate(-90 60.2162 1.66371)"
+          fill="#3056D3"
+        />
+        <circle
+          cx="74.6634"
+          cy="1.66371"
+          r="1.66343"
+          transform="rotate(-90 74.6634 1.66371)"
+          fill="#3056D3"
+        />
+      </svg>
+    </>
+  );
+};

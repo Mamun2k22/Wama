@@ -6,7 +6,7 @@ import ContactHero from './ContactHero';
 
 const Contact = () => {
     return (
-        <div className='lg:my-12 my-8 bg-stone-100 dark:bg-gray-800'>
+        <div className='lg:my-12 my-8 bg-[#fcfcfc] dark:bg-gray-800'>
             {/* ContactHero */}
             <ContactHero></ContactHero>
             {/* Faq */}
@@ -23,7 +23,7 @@ const Contact = () => {
                             className="absolute hidden md:block -top-14 left-0 text-[120px] text-gray-400 font-bold opacity-10">
                             CONTACT
                         </div>
-                        <h1 className="text-5xl lg:text-5xl font-bold dark:text-white"> <span className="text-blue-500"> CONTACT US
+                        <h1 id='Contact' className="text-2xl lg:text-4xl font-bold dark:text-white"> <span className="text-blue-500"> Write us a message
                             </span> </h1>
                         <div className="flex w-24 mt-1 mb-10 overflow-hidden rounded">
                             <div className="flex-1 h-2 bg-blue-200">
@@ -40,8 +40,11 @@ const Contact = () => {
             </div>
            </div>
             </div>
-        <div class="flex flex-wrap ">
-        <div class="w-full px-4 lg:w-1/2 mb-11 lg:mt-10">
+           
+        <div class="lg:flex flex-row ">
+
+        {/* Contact Information */}
+        <div  class="w-full px-4 lg:w-1/2 mb-11 lg:mt-10">
         <div class="flex flex-wrap">
         <div class="w-full px-4 mb-10 sm:w-1/2">
         <div class="max-w-xs mx-auto">
@@ -109,10 +112,9 @@ const Contact = () => {
         </div>
         </div>
         </div>
-         <section class="flex items-center bg-stone-100 font-poppins dark:bg-gray-800  ">
+         {/* Message sent */}
+         <section class="flex items-center bg-[#FFFFFF] font-poppins dark:bg-gray-800  ">
         <div class="justify-center flex-1 max-w-2xl px-4 py-4 mx-auto lg:py-6 md:px-6 ">
-        
-            {/* <div class="w-20 mx-auto mb-6 border-b border-red-700 dark:border-gray-400"></div> */}
             <div class="px-3 py-6 rounded shadow-md dark:bg-gray-700 bg-gray-50 border border-blue-600">
                 <form action="" class="">
                     <div class="flex flex-wrap mb-6">
@@ -159,8 +161,9 @@ const Contact = () => {
                 </form>
             </div>
         </div>
-    </section>
+         </section>
         </div>
+
         </div>
           </section>
 
