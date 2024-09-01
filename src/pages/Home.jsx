@@ -1,29 +1,32 @@
-import React from 'react';
-import Navigation from './Navigation';
-import Contact from './Contact';
-import Testimonial from './Testimonial';
-import Statistic from './Statistic';
-import Tips from './Tips';
-import About from './About';
-import HomeHero from './HomeHero';
-import Projects from './Projects';
-import Footer from './Footer';
+import React from "react";
 
+import { Nav } from "./Nav";
+import MusicPlayer from "./MusicPlayer";
+import Cover from "./Cover";
+import Plan from "./Plan";
+import JoinUsForm from "./JoinUsForm";
+import Price from "./Price";
+import Contact from "./Contact";
+import JoinUsCover from "./JoinUsCover";
 
 const Home = () => {
-    return (
-        <div>
-           <Navigation />
-           <HomeHero />
-           <About />
-           <Tips />
-           <Projects />
-           <Statistic />
-           <Testimonial />
-           <Contact  />
-           <Footer  />
-        </div>
-    );
+  return (
+    <div>
+      <Nav />
+
+      <MusicPlayer />
+      
+      <Cover />
+      <Plan />
+     
+      <JoinUsCover/>
+      <JoinUsForm/>
+      
+
+      <Contact />
+      {/* <ContactTwo /> */}
+    </div>
+  );
 };
 
 export default Home;
